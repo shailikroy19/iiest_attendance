@@ -10,7 +10,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //aniket
       debugShowCheckedModeBanner: false,
       title: 'IIEST Attendance Portal',
       theme: ThemeData(
