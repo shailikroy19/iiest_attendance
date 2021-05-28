@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
 import 'package:iiest_attendance/login_page/login_screen.dart';
@@ -58,7 +57,7 @@ class FirstScreen extends StatelessWidget {
                             ),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.of(context).push(CupertinoPageRoute(
+                                Navigator.of(context).push(MaterialPageRoute(
                                     builder: (f) => LoginScreen(
                                         name: 'STUDENT LOGIN', type: false)));
                               },
@@ -95,7 +94,7 @@ class FirstScreen extends StatelessWidget {
                             ),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.of(context).push(CupertinoPageRoute(
+                                Navigator.of(context).push(MaterialPageRoute(
                                     builder: (f) => LoginScreen(
                                         name: 'TEACHER LOGIN', type: true)));
                               },

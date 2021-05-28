@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/home_page/student_home.dart';
 
 class LoginScreen extends StatefulWidget {
   final String name;
@@ -147,6 +148,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     // ignore: deprecated_member_use
                     child: RaisedButton(
                       onPressed: () async {
+                        //TODO: CHANGE
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (f) => StudentHomePage(
+                                name: 'DEMO abc',
+                                enrol: '510819000',
+                                email:
+                                    '510819000.DEMO@students.iiests.ac.in')));
+                        //??????????????????????????????????????????????????
+                        //??????????????????????????????????????????????????
                         // Navigator.of(context).pushReplacement(
                         //     MaterialPageRoute(builder: (f) => HomeScreen()));
                         // CALLING WEB SERVICE

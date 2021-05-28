@@ -16,10 +16,6 @@ Widget logoIIEST(double width) {
   );
 }
 
-Widget logoIIESTShort(double size) {
-  return Container();
-}
-
 //STYLED DIVIDER
 Widget customStyledDivider(double factor, IconData icon) {
   return Padding(
