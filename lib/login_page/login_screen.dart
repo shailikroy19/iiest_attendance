@@ -152,7 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         //TODO: CHANGE
                         if (widget.type) {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (f) => TeacherHomePage()));
+                              builder: (f) => TeacherHomePage(
+                                  name: "Demo Teacher",
+                                  email: "demo@demo.com")));
                         } else {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (f) => StudentHomePage(

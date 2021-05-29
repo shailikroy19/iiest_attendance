@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
 
-Future<dynamic> StudentModalSheet(
-    BuildContext context, Size size, String name, String enrol, String email) {
+Future<dynamic> TeacherModalSheet(
+    BuildContext context, Size size, String name, String email) {
   return showModalBottomSheet(
     backgroundColor: Colors.transparent,
     context: context,
@@ -23,7 +23,7 @@ Future<dynamic> StudentModalSheet(
               padding: const EdgeInsets.all(4.0),
               child: Center(
                   child: Text(
-                'Student Profile',
+                'Teacher Profile',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 18.0,
@@ -57,45 +57,22 @@ Future<dynamic> StudentModalSheet(
                         backgroundColor: Colors.green[100],
                       ),
                     ),
-                    title: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SelectableText.rich(
-                          TextSpan(
-                            text: "Name: ",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: name,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
-                          ),
+                    title: SelectableText.rich(
+                      TextSpan(
+                        text: "Name: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SelectableText.rich(
+                        children: [
                           TextSpan(
-                            text: "Enrol: ",
+                            text: name,
                             style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: enrol,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal),
-                              ),
-                            ],
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     subtitle: SelectableText.rich(
                       TextSpan(

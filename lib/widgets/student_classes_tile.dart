@@ -18,67 +18,72 @@ class StudentClassTile extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'DSA',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'IT 2101',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500, color: Colors.grey),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '25',
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'Total Classes',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500, color: Colors.grey),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '15',
-                    style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'Attendance',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500, color: Colors.grey),
-                  ),
-                ],
-              ),
-            ],
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'DSA',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'IT 2101',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.grey),
+                    ),
+                  ],
+                ),
+                VerticalDivider(thickness: 2.0),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '25',
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Total Classes',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.grey),
+                    ),
+                  ],
+                ),
+                VerticalDivider(thickness: 2.0),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '15',
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Attendance',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

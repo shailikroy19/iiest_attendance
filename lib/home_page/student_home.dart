@@ -16,65 +16,66 @@ class _StudentHomePageState extends State<StudentHomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: PreferredSize(
-          child: Container(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 15.0, top: 15.0, bottom: 15.0),
-                  child: Text(
-                    'Attendance Portal',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black),
-                  ),
-                ),
-                Tooltip(
-                  message: 'View Profile',
-                  child: IconButton(
-                    onPressed: () {
-                      StudentModalSheet(context, size, widget.name,
-                          widget.enrol, widget.email);
-                    },
-                    icon: Icon(
-                      Icons.account_circle_outlined,
-                      size: 28.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            decoration: BoxDecoration(
-                gradient: iiestGradient,
-                backgroundBlendMode: BlendMode.multiply),
-          ),
-          preferredSize: Size(MediaQuery.of(context).size.width, 55.0),
-        ),
-        body: Stack(
-          children: [
-            Container(
-              height: size.height,
-              width: size.width,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Color(0xffC9FFD9), Colors.white12],
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft)),
-            ),
-            SingleChildScrollView(
-              child: Container(
-                width: size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [StudentClassTile()],
+      appBar: PreferredSize(
+        child: Container(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 15.0, top: 15.0, bottom: 15.0),
+                child: Text(
+                  'Attendance Portal',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
                 ),
               ),
+              Tooltip(
+                message: 'View Profile',
+                child: IconButton(
+                  onPressed: () {
+                    StudentModalSheet(
+                        context, size, widget.name, widget.enrol, widget.email);
+                  },
+                  icon: Icon(
+                    Icons.account_circle_outlined,
+                    size: 28.0,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          decoration: BoxDecoration(
+              gradient: iiestGradient, backgroundBlendMode: BlendMode.multiply),
+        ),
+        preferredSize: Size(MediaQuery.of(context).size.width, 55.0),
+      ),
+      body: Stack(
+        children: [
+          Container(
+            height: size.height,
+            width: size.width,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Color(0xffC9FFD9), Colors.white12],
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft)),
+          ),
+          SingleChildScrollView(
+            child: Container(
+              width: size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [StudentClassTile()],
+              ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+      bottomNavigationBar: iiestFooter(Colors.white),
+    );
   }
 }
