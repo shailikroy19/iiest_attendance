@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
 import 'package:iiest_attendance/home_page/student_home.dart';
+import 'package:iiest_attendance/home_page/teacher_home.dart';
 
 class LoginScreen extends StatefulWidget {
   final String name;
@@ -149,12 +150,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: RaisedButton(
                       onPressed: () async {
                         //TODO: CHANGE
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (f) => StudentHomePage(
-                                name: 'DEMO abc',
-                                enrol: '510819000',
-                                email:
-                                    '510819000.DEMO@students.iiests.ac.in')));
+                        if (widget.type) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (f) => TeacherHomePage()));
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (f) => StudentHomePage(
+                                  name: 'DEMO abc',
+                                  enrol: '510819000',
+                                  email:
+                                      '510819000.DEMO@students.iiests.ac.in')));
+                        }
                         //??????????????????????????????????????????????????
                         //??????????????????????????????????????????????????
                         // Navigator.of(context).pushReplacement(

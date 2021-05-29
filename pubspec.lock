@@ -86,13 +86,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
-  marquee_widget:
-    dependency: "direct main"
-    description:
-      name: marquee_widget
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.0"
   matcher:
     dependency: transitive
     description:
