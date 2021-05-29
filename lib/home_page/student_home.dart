@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/student_side/subject_page.dart';
 import 'package:iiest_attendance/widgets/student_classes_tile.dart';
 import 'package:iiest_attendance/widgets/student_profile_modal_sheet.dart';
 
@@ -137,7 +138,15 @@ class _StudentHomePageState extends State<StudentHomePage> {
                   width: size.width,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [StudentClassTile()],
+                    children: [
+                      InkWell(
+                        child: StudentClassTile(),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SubjectPage()));
+                        },
+                      )
+                    ],
                   ),
                 ),
               ),
