@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/teachers_side/teacher_subject_page.dart';
 
 class ClassHomePage extends StatefulWidget {
   final String class_name, id;
@@ -90,7 +91,8 @@ class _ClassHomePageState extends State<ClassHomePage> {
         body: TabBarView(
           children: [
             Icon(Icons.directions_car),
-            Icon(Icons.directions_transit),
+            //Icon(Icons.directions_transit),
+            TeacherSubject(),
           ],
         ),
         bottomNavigationBar: iiestFooter(Colors.white),
