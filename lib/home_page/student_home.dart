@@ -1,19 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
 import 'package:iiest_attendance/widgets/student_classes_tile.dart';
 import 'package:iiest_attendance/widgets/student_profile_modal_sheet.dart';
 
 class StudentHomePage extends StatefulWidget {
-  final String name, enrol, email;
-  const StudentHomePage(
-      {required this.name, required this.enrol, required this.email});
+  final user;
+  const StudentHomePage({required this.user});
   @override
-  _StudentHomePageState createState() => _StudentHomePageState();
+  _StudentHomePageState createState() => _StudentHomePageState(user: user);
 }
 
 class _StudentHomePageState extends State<StudentHomePage> {
+  User user;
+  _StudentHomePageState({required this.user});
+
   @override
   Widget build(BuildContext context) {
+    //name and enrol
+    String name, enrol, email;
+
+    email = user.email.toString();
+
+    enrol = email.substring(0, 9);
+
+    name = "DEMO";
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
@@ -36,8 +48,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                 message: 'View Profile',
                 child: IconButton(
                   onPressed: () {
-                    StudentModalSheet(
-                        context, size, widget.name, widget.enrol, widget.email);
+                    StudentModalSheet(context, size, name, enrol, email);
                   },
                   icon: Icon(
                     Icons.account_circle_outlined,

@@ -88,8 +88,8 @@ class FirstScreen extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (f) => LoginScreen(
-                                        name: 'STUDENT LOGIN', type: false)));
+                                    builder: (f) =>
+                                        LoginScreen(name: 'STUDENT LOGIN')));
                               },
                               child: Text('STUDENT LOGIN',
                                   style: TextStyle(color: Colors.black)),
@@ -141,8 +141,8 @@ class FirstScreen extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (f) => LoginScreen(
-                                        name: 'TEACHER LOGIN', type: true)));
+                                    builder: (f) =>
+                                        LoginScreen(name: 'TEACHER LOGIN')));
                               },
                               child: Text('TEACHER LOGIN',
                                   style: TextStyle(color: Colors.black)),

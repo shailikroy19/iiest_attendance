@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "969568378776",
+    "project_id": "iiest-attendance",
+    "storage_bucket": "iiest-attendance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969568378776:android:13236e7e019514512695ed",
+        "android_client_info": {
+          "package_name": "com.example.iiest_attendance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969568378776-3247tkk0vjsqpr9ua0kep1aatb2ehf53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe0qNyAi3NcLgYtNfQaENRHJHTuEYd_F8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969568378776-3247tkk0vjsqpr9ua0kep1aatb2ehf53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

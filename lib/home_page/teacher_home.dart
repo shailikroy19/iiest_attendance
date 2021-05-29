@@ -1,19 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
 import 'package:iiest_attendance/widgets/teacher_class_tile.dart';
 import 'package:iiest_attendance/widgets/teacher_profile_modal_sheet.dart';
 
 class TeacherHomePage extends StatefulWidget {
-  final String name, email;
-
-  const TeacherHomePage({required this.name, required this.email});
+  final User user;
+  const TeacherHomePage({required this.user});
   @override
-  _TeacherHomePageState createState() => _TeacherHomePageState();
+  _TeacherHomePageState createState() => _TeacherHomePageState(user: user);
 }
 
 class _TeacherHomePageState extends State<TeacherHomePage> {
+  User user;
+  _TeacherHomePageState({required this.user});
+
   @override
   Widget build(BuildContext context) {
+    String name, email;
+
+    email = user.email.toString();
+    name = "DEMO";
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
@@ -40,8 +48,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                     child: InkWell(
                       child: IconButton(
                         onPressed: () {
-                          TeacherModalSheet(
-                              context, size, widget.name, widget.email);
+                          TeacherModalSheet(context, size, name, email);
                         },
                         icon: Icon(
                           Icons.account_circle_outlined,

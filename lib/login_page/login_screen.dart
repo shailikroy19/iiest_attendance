@@ -1,14 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iiest_attendance/colors.dart';
-import 'package:iiest_attendance/home_page/student_home.dart';
-import 'package:iiest_attendance/home_page/teacher_home.dart';
+import 'package:iiest_attendance/home_page/home_screen.dart';
+import 'package:iiest_attendance/login_page/login_web.dart';
 
 class LoginScreen extends StatefulWidget {
   final String name;
-  final bool type;
-  LoginScreen({required this.name, required this.type});
+  LoginScreen({required this.name});
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -104,43 +104,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 //#####################################################################################################
                 //#####################################################################################################
                 //FIREBASE LOGIN CODE
-                // (flag)
-                //     ? FutureBuilder(
-                //         future: loginUser(
-                //             emailController.text, passwordController.text),
-                //         // ignore: missing_return
-                //         builder: (context, snapshot) {
-                //           if (snapshot.connectionState ==
-                //               ConnectionState.waiting) {
-                //             return Padding(
-                //               padding: const EdgeInsets.only(top: 5.0),
-                //               child: Center(
-                //                   child:
-                //                       LinearProgressIndicator(minHeight: 2.0)),
-                //             );
-                //           }
-                //           flag = false;
-                //           if (snapshot.hasData) {
-                //             Future.delayed(Duration(milliseconds: 100), () {
-                //               if (!kIsWeb) {
-                //                 //IS APP
-                //                 Navigator.of(context).pushReplacement(
-                //                     MaterialPageRoute(
-                //                         builder: (f) =>
-                //                             HomeScreen(user: snapshot.data)));
-                //               } else {
-                //                 //IS WEB
-                //                 Navigator.of(context).pushReplacement(
-                //                     MaterialPageRoute(
-                //                         builder: (f) =>
-                //                             WebHomePage(user: snapshot.data)));
-                //               }
-                //             });
-                //           }
-                //           return Container();
-                //         },
-                //       )
-                //     : SizedBox(height: 0.0),
+                (flag)
+                    ? FutureBuilder(
+                        future: loginUser(
+                            emailController.text, passwordController.text),
+                        // ignore: missing_return
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Center(
+                                  child:
+                                      LinearProgressIndicator(minHeight: 2.0)),
+                            );
+                          }
+                          flag = false;
+                          if (snapshot.hasData) {
+                            Future.delayed(Duration(milliseconds: 100), () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (f) =>
+                                      HomeScreen(user: snapshot.data)));
+                            });
+                          }
+                          return Container();
+                        },
+                      )
+                    : SizedBox(height: 0.0),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8.0, 15.0, 8.0, 5.0),
                   child: Container(
@@ -149,51 +139,45 @@ class _LoginScreenState extends State<LoginScreen> {
                     // ignore: deprecated_member_use
                     child: RaisedButton(
                       onPressed: () async {
-                        //TODO: CHANGE
-                        if (widget.type) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (f) => TeacherHomePage(
-                                  name: "Demo Teacher",
-                                  email: "demo@demo.com")));
-                        } else {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (f) => StudentHomePage(
-                                  name: 'DEMO abc',
-                                  enrol: '510819000',
-                                  email:
-                                      '510819000.DEMO@students.iiests.ac.in')));
-                        }
+                        // if (widget.type) {
+                        //   Navigator.of(context).push(MaterialPageRoute(
+                        //       builder: (f) => TeacherHomePage(
+                        //           name: "Demo Teacher",
+                        //           email: "demo@demo.com")));
+                        // } else {
+
+                        // }
                         //??????????????????????????????????????????????????
                         //??????????????????????????????????????????????????
                         // Navigator.of(context).pushReplacement(
                         //     MaterialPageRoute(builder: (f) => HomeScreen()));
                         // CALLING WEB SERVICE
-                        // if (emailController.text == '' ||
-                        //     passwordController.text == '') {
-                        //   Fluttertoast.showToast(
-                        //     msg: 'Enter Valid Credentials!',
-                        //     toastLength: Toast.LENGTH_LONG,
-                        //     textColor: Colors.white,
-                        //     fontSize: 15.0,
-                        //     backgroundColor: Colors.black54,
-                        //     gravity: ToastGravity.BOTTOM,
-                        //   );
-                        // } else {
-                        //   if (!isChecked) {
-                        //     Fluttertoast.showToast(
-                        //       msg: 'Please Agree to the Terms and Conditions!',
-                        //       toastLength: Toast.LENGTH_SHORT,
-                        //       textColor: Colors.white,
-                        //       fontSize: 15.0,
-                        //       backgroundColor: Colors.black54,
-                        //       gravity: ToastGravity.BOTTOM,
-                        //     );
-                        //   } else {
-                        //     setState(() {
-                        //       flag = true;
-                        //     });
-                        //   }
-                        // }
+                        if (emailController.text == '' ||
+                            passwordController.text == '') {
+                          Fluttertoast.showToast(
+                            msg: 'Enter Valid Credentials!',
+                            toastLength: Toast.LENGTH_LONG,
+                            textColor: Colors.white,
+                            fontSize: 15.0,
+                            backgroundColor: Colors.black54,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                        } else {
+                          if (!isChecked) {
+                            Fluttertoast.showToast(
+                              msg: 'Please Agree to the Terms and Conditions!',
+                              toastLength: Toast.LENGTH_SHORT,
+                              textColor: Colors.white,
+                              fontSize: 15.0,
+                              backgroundColor: Colors.black54,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                          } else {
+                            setState(() {
+                              flag = true;
+                            });
+                          }
+                        }
                       },
                       color: Colors.amber[200],
                       shape: RoundedRectangleBorder(

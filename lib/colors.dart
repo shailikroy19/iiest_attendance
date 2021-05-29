@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iiest_attendance/login_page/first_screen.dart';
+import 'package:iiest_attendance/login_page/login_web.dart';
 
 final Gradient iiestGradient = LinearGradient(
     colors: [Color(0xCC97C74E), Color(0xFF2AB9A5)],
@@ -78,5 +80,56 @@ Widget iiestFooter(Color backgroundColor) {
         ],
       ),
     ),
+  );
+}
+
+//alert dialog//alert dialog//alert dialog//alert dialog//alert dialog//alert dialog
+//alert dialog//alert dialog//alert dialog//alert dialog//alert dialog//alert dialog
+//alert dialog//alert dialog//alert dialog//alert dialog//alert dialog//alert dialog
+
+showLogoutAlertDialog(BuildContext context) {
+  // set up the button
+  // ignore: deprecated_member_use
+  Widget yesButton = FlatButton(
+    splashColor: Colors.red[100],
+    child: Text("Sign Out"),
+    onPressed: () {
+      //LOGOUT
+      logoutUser().then((f) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (f) {
+          return FirstScreen();
+        }));
+      });
+    },
+  );
+  // ignore: deprecated_member_use
+  Widget noButton = FlatButton(
+    splashColor: Colors.green[100],
+    child: Text("Cancel"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+    title: Text('Warning!',
+        style: TextStyle(color: Colors.redAccent, fontSize: 22.0)),
+    content: Text(
+        'Are you sure you want to Sign Out?\n\nYou will need to sign in again the next time you open the app.',
+        style: TextStyle(fontSize: 15.0)),
+    actions: [
+      yesButton,
+      noButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
   );
 }

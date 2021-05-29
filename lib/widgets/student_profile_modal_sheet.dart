@@ -113,7 +113,7 @@ Future<dynamic> StudentModalSheet(
                   child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(primary: Colors.red[300]),
                       onPressed: () {
-                        //TODO: implement logout
+                        showLogoutAlertDialog(context);
                       },
                       icon: Icon(Icons.logout_outlined, color: Colors.black),
                       label: Text(

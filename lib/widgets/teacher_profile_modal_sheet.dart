@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/login_page/first_screen.dart';
+import 'package:iiest_attendance/login_page/login_web.dart';
 
 Future<dynamic> TeacherModalSheet(
     BuildContext context, Size size, String name, String email) {
@@ -90,7 +92,7 @@ Future<dynamic> TeacherModalSheet(
                   child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(primary: Colors.red[300]),
                       onPressed: () {
-                        //TODO: implement logout
+                        showLogoutAlertDialog(context);
                       },
                       icon: Icon(Icons.logout_outlined, color: Colors.black),
                       label: Text(
