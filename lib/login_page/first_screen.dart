@@ -25,10 +25,24 @@ class FirstScreen extends StatelessWidget {
                 child: logoIIEST(size.width / 1.3),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
                 child: Text(
                   'ATTENDANCE COLLECTION PORTAL',
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Container(
+                  height: 250,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    image: DecorationImage(
+                      image: AssetImage('assets/iiest_old.jpg'),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
                 ),
               ),
               Padding(
@@ -41,16 +55,35 @@ class FirstScreen extends StatelessWidget {
                       Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Student\'s Section',
-                              style: TextStyle(
-                                  fontSize: 17.0, fontWeight: FontWeight.bold),
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 10.0),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Registered Students',
+                                    style: TextStyle(
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '100',
+                                    //TODO:will change
+                                    style: TextStyle(
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
                             width: size.width / 2.4,
-                            height: 60.0,
+                            height: 80.0,
                             decoration: BoxDecoration(
                               gradient: iiestGradient,
                               borderRadius: BorderRadius.circular(8.0),
@@ -78,16 +111,35 @@ class FirstScreen extends StatelessWidget {
                       Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Teacher\'s Section',
-                              style: TextStyle(
-                                  fontSize: 17.0, fontWeight: FontWeight.bold),
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 10.0),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Registered Teachers',
+                                    style: TextStyle(
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '10',
+                                    //TODO:will change
+                                    style: TextStyle(
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
                             width: size.width / 2.4,
-                            height: 60.0,
+                            height: 80.0,
                             decoration: BoxDecoration(
                               gradient: iiestGradient,
                               borderRadius: BorderRadius.circular(8.0),
@@ -125,6 +177,17 @@ class FirstScreen extends StatelessWidget {
               //     ),
               //   ),
               // ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.info_outline, color: Colors.black),
+                  label: Text('Important Instructions',
+                      style: TextStyle(color: Colors.black)),
+                  style:
+                      ElevatedButton.styleFrom(primary: Colors.blueAccent[100]),
+                ),
+              ),
             ],
           ),
         ),
