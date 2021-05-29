@@ -285,39 +285,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  //#####################################################################################################
-  //#####################################################################################################
-  //#####################################################################################################
-  //#####################################################################################################
-  //alert dialog
-  showAlertDialog(BuildContext context, String header, String body) {
-    // set up the button
-    // ignore: deprecated_member_use
-    Widget okButton = FlatButton(
-      child: Text("OK"),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(header),
-      content: Text(body),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -356,4 +323,37 @@ class _LoginScreenState extends State<LoginScreen> {
       bottomNavigationBar: iiestFooter(Colors.white),
     );
   }
+}
+
+//#####################################################################################################
+//#####################################################################################################
+//#####################################################################################################
+//#####################################################################################################
+//alert dialog
+showAlertDialog(BuildContext context, String header, String body) {
+  // set up the button
+  // ignore: deprecated_member_use
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text(header),
+    content: Text(body),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
