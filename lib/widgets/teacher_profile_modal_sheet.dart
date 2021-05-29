@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
-import 'package:iiest_attendance/login_page/first_screen.dart';
-import 'package:iiest_attendance/login_page/login_web.dart';
 
 Future<dynamic> TeacherModalSheet(
     BuildContext context, Size size, String name, String email) {
@@ -36,7 +34,7 @@ Future<dynamic> TeacherModalSheet(
           Container(
             width: size.width,
             //height: size.height / 2.3,
-            height: 180.0,
+            height: 170.0,
             color: Colors.white,
             child: Column(
               children: [

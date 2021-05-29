@@ -56,90 +56,92 @@ class _CreateClassState extends State<CreateClass> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft)),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please enter subject name";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: "Enter subject name",
-                      contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
-                      border: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.teal)),
-                      filled: true,
-                      fillColor: Colors.green.withOpacity(0.3),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (value) {},
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter subject name";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter subject name",
+                        contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
+                        border: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.teal)),
+                        filled: true,
+                        fillColor: Colors.green.withOpacity(0.3),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please enter subject code";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: "Enter subject code",
-                      contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
-                      border: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.teal)),
-                      filled: true,
-                      fillColor: Colors.green.withOpacity(0.3),
+                    SizedBox(
+                      height: 20.0,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please enter semester";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: "Enter semester",
-                      contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
-                      border: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.teal)),
-                      filled: true,
-                      fillColor: Colors.green.withOpacity(0.3),
+                    TextFormField(
+                      onChanged: (value) {},
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter subject code";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter subject code",
+                        contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
+                        border: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.teal)),
+                        filled: true,
+                        fillColor: Colors.green.withOpacity(0.3),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please enter class code";
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: "Enter class code (Unique)",
-                      contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
-                      border: OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.teal)),
-                      filled: true,
-                      fillColor: Colors.green.withOpacity(0.3),
+                    SizedBox(
+                      height: 20.0,
                     ),
-                  ),
-                ],
+                    TextFormField(
+                      onChanged: (value) {},
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter semester";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter semester",
+                        contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
+                        border: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.teal)),
+                        filled: true,
+                        fillColor: Colors.green.withOpacity(0.3),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {},
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter class code";
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Enter class code (Unique)",
+                        contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
+                        border: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.teal)),
+                        filled: true,
+                        fillColor: Colors.green.withOpacity(0.3),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

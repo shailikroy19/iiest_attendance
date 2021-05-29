@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
@@ -18,75 +19,133 @@ class _StudentHomePageState extends State<StudentHomePage> {
   @override
   Widget build(BuildContext context) {
     //name and enrol
+
+    var data;
+
     String name, enrol, email;
 
     email = user.email.toString();
 
     enrol = email.substring(0, 9);
 
-    name = "DEMO";
+    name = "";
 
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: PreferredSize(
-        child: Container(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15.0, top: 15.0, bottom: 15.0),
-                child: Text(
-                  'Attendance Portal',
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black),
+
+    return FutureBuilder<DocumentSnapshot>(
+      future:
+          FirebaseFirestore.instance.collection('Students').doc(email).get(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(strokeWidth: 2.0),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(child: Text('Loading... Please Wait')),
                 ),
+              ],
+            ),
+          );
+        }
+
+        if (snapshot.hasError) {
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                  child: Text(
+                'An unexpexted error occured!',
+                style: TextStyle(color: Colors.red),
+              )),
+            ),
+          );
+        }
+        if (snapshot.hasData) {
+          data = snapshot.data?.data();
+          name = data['name'];
+        }
+
+        return Scaffold(
+          appBar: PreferredSize(
+            child: Container(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: 15.0, top: 15.0, bottom: 15.0),
+                        child: Text(
+                          'Attendance Portal',
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black),
+                        ),
+                      ),
+                      Tooltip(
+                        message: 'View Profile',
+                        child: IconButton(
+                          onPressed: () {
+                            StudentModalSheet(
+                                context, size, name, enrol, email);
+                          },
+                          icon: Icon(
+                            Icons.account_circle_outlined,
+                            size: 28.0,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(14.0, 8.0, 8.0, 8.0),
+                    child: Text(
+                      'Welcome: ${name}',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ],
               ),
-              Tooltip(
-                message: 'View Profile',
-                child: IconButton(
-                  onPressed: () {
-                    StudentModalSheet(context, size, name, enrol, email);
-                  },
-                  icon: Icon(
-                    Icons.account_circle_outlined,
-                    size: 28.0,
-                    color: Colors.black,
+              decoration: BoxDecoration(
+                  gradient: iiestGradient,
+                  backgroundBlendMode: BlendMode.multiply),
+            ),
+            preferredSize: Size(MediaQuery.of(context).size.width, 85.0),
+          ),
+          body: Stack(
+            children: [
+              Container(
+                height: size.height,
+                width: size.width,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [Color(0xffC9FFD9), Colors.white12],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft)),
+              ),
+              SingleChildScrollView(
+                child: Container(
+                  width: size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [StudentClassTile()],
                   ),
                 ),
               ),
             ],
           ),
-          decoration: BoxDecoration(
-              gradient: iiestGradient, backgroundBlendMode: BlendMode.multiply),
-        ),
-        preferredSize: Size(MediaQuery.of(context).size.width, 55.0),
-      ),
-      body: Stack(
-        children: [
-          Container(
-            height: size.height,
-            width: size.width,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Color(0xffC9FFD9), Colors.white12],
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft)),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              width: size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [StudentClassTile()],
-              ),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: iiestFooter(Colors.white),
+          bottomNavigationBar: iiestFooter(Colors.white),
+        );
+      },
     );
   }
 }
