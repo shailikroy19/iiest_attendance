@@ -24,6 +24,23 @@ class TeacherClassTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "4",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Sem",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.grey),
+                    ),
+                  ],
+                ),
+
+                VerticalDivider(thickness: 2.0),
+                Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/teachers_side/create_class_page.dart';
 import 'package:iiest_attendance/widgets/teacher_class_tile.dart';
 import 'package:iiest_attendance/widgets/teacher_profile_modal_sheet.dart';
 
@@ -85,7 +86,10 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (f) => CreateClass()));
+                    },
                     icon: Icon(Icons.add, color: Colors.black),
                     label: Text('Create a Class',
                         style: TextStyle(color: Colors.black)),
