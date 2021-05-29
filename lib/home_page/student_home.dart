@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/widgets/student_classes_tile.dart';
+import 'package:iiest_attendance/widgets/student_profile_modal_sheet.dart';
 
 class StudentHomePage extends StatefulWidget {
   final String name, enrol, email;
@@ -32,137 +34,15 @@ class _StudentHomePageState extends State<StudentHomePage> {
               ),
               Tooltip(
                 message: 'View Profile',
-                child: InkWell(
-                  child: IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) {
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Container(
-                                width: size.width,
-                                height: 22.0,
-                                decoration: BoxDecoration(
-                                  gradient: iiestGradient,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(8.0),
-                                      topRight: Radius.circular(8.0)),
-                                ),
-                                child: Center(
-                                    child: Text(
-                                  'Student Profile',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                              ),
-                              Container(
-                                width: size.width,
-                                //height: size.height / 2.3,
-                                height: 180.0,
-                                color: Colors.white,
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ListTile(
-                                        leading: Container(
-                                          width: 50.0,
-                                          child: CircleAvatar(
-                                              child: Icon(
-                                                Icons.person,
-                                                color: Colors.black,
-                                              ),
-                                              radius: 30.0,
-                                              backgroundColor: Colors.grey),
-                                        ),
-                                        title: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SelectableText.rich(
-                                              TextSpan(
-                                                text: "Name: ",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                                children: [
-                                                  TextSpan(
-                                                    text: widget.name,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.normal),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SelectableText.rich(
-                                              TextSpan(
-                                                text: "Enrol: ",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                                children: [
-                                                  TextSpan(
-                                                    text: widget.enrol,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.normal),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        subtitle: SelectableText.rich(
-                                          TextSpan(
-                                            text: widget.email,
-                                            style: TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                color: Colors.blueAccent,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ElevatedButton.icon(
-                                          style: ElevatedButton.styleFrom(
-                                              primary: Colors.red[300]),
-                                          onPressed: () {},
-                                          icon: Icon(Icons.logout_outlined,
-                                              color: Colors.black),
-                                          label: Text(
-                                            'LOGOUT',
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    icon: Icon(
-                      Icons.account_circle_outlined,
-                      size: 28.0,
-                      color: Colors.black,
-                    ),
+                child: IconButton(
+                  onPressed: () {
+                    StudentModalSheet(
+                        context, size, widget.name, widget.enrol, widget.email);
+                  },
+                  icon: Icon(
+                    Icons.account_circle_outlined,
+                    size: 28.0,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -178,7 +58,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
           width: size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('Classes')],
+            children: [StudentClassTile()],
           ),
         ),
       ),
