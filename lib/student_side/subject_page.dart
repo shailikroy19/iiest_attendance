@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/student_side/qr_code_scanner.dart';
 import 'package:iiest_attendance/widgets/student_subject_history_tile.dart';
 
 class SubjectPage extends StatefulWidget {
@@ -99,6 +100,8 @@ class _SubjectPageState extends State<SubjectPage> {
                     ElevatedButton(
                       onPressed: () {
                         //todo : add scanner
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => QRViewExample()));
                       },
                       child: Text(
                         "Scan QR Code",

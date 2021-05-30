@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.iiest_attendance">
+
+
+  <uses-permission android:name="android.permission.CAMERA"/>
    <application
         android:label="iiest_attendance"
         android:icon="@mipmap/ic_launcher">
