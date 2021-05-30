@@ -37,7 +37,8 @@ class _CreateClassState extends State<CreateClass> {
       Navigator.of(context).pop();
       showCodeAlertDialog(context, uid);
     }).catchError((error) {
-      Fluttertoast.showToast(msg: 'An Unexpected Error Occured!');
+      Fluttertoast.showToast(
+          msg: 'An Unexpected Error Occured!\n\n' + error.toString());
     });
   }
 

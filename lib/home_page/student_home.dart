@@ -26,6 +26,8 @@ class _StudentHomePageState extends State<StudentHomePage> {
 
     String name, enrol, email;
 
+    List classListStudent = [];
+
     email = user.email.toString();
 
     enrol = email.substring(0, 9);
@@ -69,6 +71,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
         if (snapshot.hasData) {
           data = snapshot.data?.data();
           name = data['name'];
+          classListStudent = data['classes'];
         }
 
         return Scaffold(
@@ -155,8 +158,8 @@ class _StudentHomePageState extends State<StudentHomePage> {
           ),
           floatingActionButton: ElevatedButton.icon(
             onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (f) => JoinClass()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (f) => JoinClass(classList: classListStudent)));
             },
             icon: Icon(Icons.add, color: Colors.black),
             label: Text('Join a Class', style: TextStyle(color: Colors.black)),

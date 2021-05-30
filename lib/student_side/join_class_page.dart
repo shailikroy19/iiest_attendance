@@ -1,13 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iiest_attendance/colors.dart';
 
 class JoinClass extends StatefulWidget {
+  final List classList;
+  JoinClass({required this.classList});
   @override
   _JoinClassState createState() => _JoinClassState();
 }
 
 class _JoinClassState extends State<JoinClass> {
   final _formKey = GlobalKey<FormState>();
+
+  CollectionReference users = FirebaseFirestore.instance.collection('Teachers');
+
+  TextEditingController uidX = new TextEditingController();
+
+  dynamic joinClassMethod(String uid) {
+    return users
+        .where('classes', arrayContains: {'uid': uid})
+        .get()
+        .then((value) {
+          //Fluttertoast.showToast(msg: 'Class Joined Sucesfully!');
+          print(value.docs.toString());
+          Navigator.of(context).pop();
+        })
+        .onError((error, stackTrace) {
+          Fluttertoast.showToast(msg: 'Error Occured: ' + error.toString());
+        });
+    // return users
+    //     .doc(widget.email)
+    //     .update({'classes': widget.classesList}).then((value) {
+
+    // }).catchError((error) {
+    //   Fluttertoast.showToast(msg: 'An Unexpected Error Occured!');
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -64,6 +94,7 @@ class _JoinClassState extends State<JoinClass> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: uidX,
                       onChanged: (value) {},
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -85,6 +116,7 @@ class _JoinClassState extends State<JoinClass> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {}
+                          joinClassMethod(uidX.text);
                         },
                         icon: Icon(Icons.add, color: Colors.black),
                         label: Text('Join Class',
