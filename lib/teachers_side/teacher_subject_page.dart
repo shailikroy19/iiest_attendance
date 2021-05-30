@@ -13,36 +13,25 @@ class _TeacherSubjectState extends State<TeacherSubject> {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: FlatButton(
-            onPressed: () {
+          padding: const EdgeInsets.all(8.0),
+          child: ListTile(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0)),
+            tileColor: Colors.orange[200],
+            onTap: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (f) => AttendanceHistory()));
             },
-            child: Container(
-              height: 100,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.teal[200],
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.green.shade100,
-                      offset: Offset(1.0, 5.0),
-                      blurRadius: 10),
-                  //BoxShadow
-                ],
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Center(
-                child: Text(
-                  '29.05.2021',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            title: Text(
+              '29.05.2021',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            //TODO: Present&time
+            trailing: Text('Present: 32'),
+            subtitle: Text('14:32'),
           ),
         ),
       ],

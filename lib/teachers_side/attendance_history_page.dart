@@ -15,66 +15,40 @@ class _AttendanceHistoryState extends State<AttendanceHistory> {
     return Scaffold(
       appBar: PreferredSize(
         child: Container(
-          height: 120,
+          //height: 120,
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'List of Students',
+                  'Student\'s List',
                   style: TextStyle(
-                    fontSize: 23.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Enrollment",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Name",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "Remarks",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+
+                //TODO: total students
+                Text(
+                  "Total no. of Students: 99",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
               ],
             ),
           ),
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          decoration: BoxDecoration(
-              gradient: iiestGradient, backgroundBlendMode: BlendMode.multiply),
+          decoration: BoxDecoration(gradient: iiestGradient),
         ),
-        preferredSize: Size(MediaQuery.of(context).size.width, 102.0),
+        preferredSize: Size(MediaQuery.of(context).size.width, 65.0),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
-            StudentListHistory(),
+            StudentListHistory(ispresent: true),
+            StudentListHistory(ispresent: false),
           ],
         ),
       ),

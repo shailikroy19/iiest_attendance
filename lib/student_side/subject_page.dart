@@ -27,7 +27,7 @@ class _SubjectPageState extends State<SubjectPage> {
                       padding:
                           EdgeInsets.only(left: 15.0, top: 15.0, bottom: 15.0),
                       child: Text(
-                        "DSA",
+                        "DSA - IT2101",
                         style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
@@ -103,10 +103,13 @@ class _SubjectPageState extends State<SubjectPage> {
                       child: Text(
                         "Scan QR Code",
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
                       ),
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.green, minimumSize: Size(120, 120)),
+                          primary: Colors.orange[200],
+                          minimumSize: Size(120, 120)),
                     )
                   ],
                 ),
@@ -125,14 +128,8 @@ class _SubjectPageState extends State<SubjectPage> {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                    StudentSubjectHistoryTile(),
-                    StudentSubjectHistoryTile(),
-                    StudentSubjectHistoryTile(),
-                    StudentSubjectHistoryTile(),
-                    StudentSubjectHistoryTile(),
-                    StudentSubjectHistoryTile(),
-                    StudentSubjectHistoryTile(),
-                    StudentSubjectHistoryTile(),
+                    StudentSubjectHistoryTile(isPresent: true),
+                    StudentSubjectHistoryTile(isPresent: false),
                   ],
                 ),
               ),
