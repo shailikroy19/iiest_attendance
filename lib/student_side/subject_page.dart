@@ -4,6 +4,8 @@ import 'package:iiest_attendance/student_side/qr_code_scanner.dart';
 import 'package:iiest_attendance/widgets/student_subject_history_tile.dart';
 
 class SubjectPage extends StatefulWidget {
+  final String name, uid, sem;
+  SubjectPage({required this.name, required this.uid, required this.sem});
   @override
   _SubjectPageState createState() => _SubjectPageState();
 }
@@ -20,6 +22,7 @@ class _SubjectPageState extends State<SubjectPage> {
           child: Container(
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,7 +31,7 @@ class _SubjectPageState extends State<SubjectPage> {
                       padding:
                           EdgeInsets.only(left: 15.0, top: 15.0, bottom: 15.0),
                       child: Text(
-                        "DSA - IT2101",
+                        widget.name,
                         style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
@@ -36,6 +39,16 @@ class _SubjectPageState extends State<SubjectPage> {
                       ),
                     ),
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 14.0, bottom: 2.0),
+                  child: Text(
+                    "Sem: " + widget.sem + "\n" + "Class Code: " + widget.uid,
+                    style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
                 ),
                 TabBar(
                   tabs: [
@@ -69,7 +82,7 @@ class _SubjectPageState extends State<SubjectPage> {
                 gradient: iiestGradient,
                 backgroundBlendMode: BlendMode.multiply),
           ),
-          preferredSize: Size(MediaQuery.of(context).size.width, 102.0),
+          preferredSize: Size(MediaQuery.of(context).size.width, 140.0),
         ),
         body: TabBarView(
           children: [

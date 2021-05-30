@@ -137,29 +137,41 @@ class _StudentHomePageState extends State<StudentHomePage> {
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft)),
               ),
-              SingleChildScrollView(
-                child: Container(
-                  width: size.width,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        child: StudentClassTile(),
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SubjectPage()));
-                        },
-                      )
-                    ],
-                  ),
-                ),
+              ListView.builder(
+                itemCount: classListStudent.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    child: StudentClassTile(
+                      subjName: classListStudent[index]['subj_name'],
+                      subjCode: classListStudent[index]['subj_code'],
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SubjectPage(
+                            name: classListStudent[index]['subj_name'] +
+                                " - " +
+                                classListStudent[index]['subj_code'],
+                            sem: classListStudent[index]['sem'],
+                            uid: classListStudent[index]['uid'],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ],
           ),
           floatingActionButton: ElevatedButton.icon(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (f) => JoinClass(classList: classListStudent)));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(
+                      builder: (f) =>
+                          JoinClass(classList: classListStudent, email: email)))
+                  .then((value) {
+                setState(() {});
+              });
             },
             icon: Icon(Icons.add, color: Colors.black),
             label: Text('Join a Class', style: TextStyle(color: Colors.black)),

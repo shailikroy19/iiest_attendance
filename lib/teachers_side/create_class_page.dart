@@ -32,13 +32,26 @@ class _CreateClassState extends State<CreateClass> {
     return users
         .doc(widget.email)
         .update({'classes': widget.classesList}).then((value) {
-      Fluttertoast.showToast(msg: 'Class Added Sucesfully!');
+      Fluttertoast.showToast(
+        msg: 'Class Added Sucesfully!',
+        toastLength: Toast.LENGTH_LONG,
+        textColor: Colors.white,
+        fontSize: 15.0,
+        backgroundColor: Colors.black54,
+        gravity: ToastGravity.BOTTOM,
+      );
       widget.classesList.clear();
       Navigator.of(context).pop();
       showCodeAlertDialog(context, uid);
     }).catchError((error) {
       Fluttertoast.showToast(
-          msg: 'An Unexpected Error Occured!\n\n' + error.toString());
+        msg: 'An Unexpected Error Occured!\n\n' + error.toString(),
+        toastLength: Toast.LENGTH_LONG,
+        textColor: Colors.white,
+        fontSize: 15.0,
+        backgroundColor: Colors.black54,
+        gravity: ToastGravity.BOTTOM,
+      );
     });
   }
 

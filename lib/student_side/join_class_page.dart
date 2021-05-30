@@ -5,7 +5,8 @@ import 'package:iiest_attendance/colors.dart';
 
 class JoinClass extends StatefulWidget {
   final List classList;
-  JoinClass({required this.classList});
+  final String email;
+  JoinClass({required this.classList, required this.email});
   @override
   _JoinClassState createState() => _JoinClassState();
 }
@@ -15,27 +16,89 @@ class _JoinClassState extends State<JoinClass> {
 
   CollectionReference users = FirebaseFirestore.instance.collection('Teachers');
 
+  CollectionReference usersx =
+      FirebaseFirestore.instance.collection('Students');
+
   TextEditingController uidX = new TextEditingController();
 
-  dynamic joinClassMethod(String uid) {
-    return users
-        .where('classes', arrayContains: {'uid': uid})
-        .get()
-        .then((value) {
-          //Fluttertoast.showToast(msg: 'Class Joined Sucesfully!');
-          print(value.docs.toString());
+  dynamic check(String uid) {
+    return usersx.doc(widget.email).get().then((value) {
+      List list = value['classes'];
+      for (int i = 0; i < list.length; i++) {
+        if (list[i]['uid'] == uid) {
+          Fluttertoast.showToast(
+            msg: 'Class already Present!',
+            toastLength: Toast.LENGTH_LONG,
+            textColor: Colors.white,
+            fontSize: 15.0,
+            backgroundColor: Colors.black54,
+            gravity: ToastGravity.BOTTOM,
+          );
           Navigator.of(context).pop();
-        })
-        .onError((error, stackTrace) {
-          Fluttertoast.showToast(msg: 'Error Occured: ' + error.toString());
-        });
-    // return users
-    //     .doc(widget.email)
-    //     .update({'classes': widget.classesList}).then((value) {
+          return;
+        }
+      }
+      joinClassMethod(uidX.text);
+    });
+  }
 
-    // }).catchError((error) {
-    //   Fluttertoast.showToast(msg: 'An Unexpected Error Occured!');
-    // });
+  dynamic addClass(Map map, String uid) {
+    widget.classList.add(map);
+    return usersx
+        .doc(widget.email)
+        .update({'classes': widget.classList}).then((value) {
+      Fluttertoast.showToast(
+        msg: 'Class Joined Sucesfully!',
+        toastLength: Toast.LENGTH_LONG,
+        textColor: Colors.white,
+        fontSize: 15.0,
+        backgroundColor: Colors.black54,
+        gravity: ToastGravity.BOTTOM,
+      );
+      widget.classList.clear();
+    }).catchError((error) {
+      Fluttertoast.showToast(
+        msg: 'An Unexpected Error Occured!\n\n' + error.toString(),
+        toastLength: Toast.LENGTH_LONG,
+        textColor: Colors.red,
+        fontSize: 15.0,
+        backgroundColor: Colors.black54,
+        gravity: ToastGravity.BOTTOM,
+      );
+    });
+  }
+
+  dynamic joinClassMethod(String uid) {
+    //check(uid);
+    bool isFound = false;
+    Map xyz = {};
+    List abc = [];
+    return users.get().then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((element) {
+        abc = element['classes'];
+        for (int i = 1; i < abc.length; i++) {
+          xyz = abc[i];
+          if (xyz['uid'] == uid) {
+            isFound = true;
+            break;
+          }
+        }
+      });
+      if (isFound) {
+        addClass(xyz, uid);
+        Navigator.of(context).pop();
+      } else {
+        Fluttertoast.showToast(
+          msg: 'Class Not Found... Please check code',
+          toastLength: Toast.LENGTH_LONG,
+          textColor: Colors.white,
+          fontSize: 15.0,
+          backgroundColor: Colors.black54,
+          gravity: ToastGravity.BOTTOM,
+        );
+        //Navigator.of(context).pop();
+      }
+    });
   }
 
   @override
@@ -94,6 +157,7 @@ class _JoinClassState extends State<JoinClass> {
                 child: Column(
                   children: [
                     TextFormField(
+                      maxLength: 6,
                       controller: uidX,
                       onChanged: (value) {},
                       validator: (value) {
@@ -116,7 +180,9 @@ class _JoinClassState extends State<JoinClass> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {}
-                          joinClassMethod(uidX.text);
+                          if (uidX.text != "") {
+                            check(uidX.text);
+                          }
                         },
                         icon: Icon(Icons.add, color: Colors.black),
                         label: Text('Join Class',

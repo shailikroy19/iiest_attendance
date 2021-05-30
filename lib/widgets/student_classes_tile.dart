@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StudentClassTile extends StatelessWidget {
+  final String subjName, subjCode;
+
+  const StudentClassTile({required this.subjName, required this.subjCode});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +29,7 @@ class StudentClassTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'DSA',
+                      subjName,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -34,7 +37,7 @@ class StudentClassTile extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      'IT 2101',
+                      subjCode,
                       style: TextStyle(
                           fontWeight: FontWeight.w500, color: Colors.grey),
                     ),
