@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
-import 'package:iiest_attendance/widgets/generate_unique_id.dart';
 
-class CreateClass extends StatefulWidget {
+class JoinClass extends StatefulWidget {
   @override
-  _CreateClassState createState() => _CreateClassState();
+  _JoinClassState createState() => _JoinClassState();
 }
 
-class _CreateClassState extends State<CreateClass> {
+class _JoinClassState extends State<JoinClass> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class _CreateClassState extends State<CreateClass> {
                           },
                           icon: Icon(Icons.arrow_back)),
                       Text(
-                        'Create Class',
+                        'Join a Class',
                         style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
@@ -68,52 +67,12 @@ class _CreateClassState extends State<CreateClass> {
                       onChanged: (value) {},
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please enter subject name";
+                          return "Please enter class code";
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "Enter subject name",
-                        contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
-                        border: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.teal)),
-                        filled: true,
-                        fillColor: Colors.green.withOpacity(0.3),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                      onChanged: (value) {},
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter subject code";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Enter subject code",
-                        contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
-                        border: OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.teal)),
-                        filled: true,
-                        fillColor: Colors.green.withOpacity(0.3),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                      onChanged: (value) {},
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter semester";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Enter semester",
+                        hintText: "Enter 6 digit class code (Unique)",
                         contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
                         border: OutlineInputBorder(
                             borderSide: new BorderSide(color: Colors.teal)),
@@ -126,10 +85,9 @@ class _CreateClassState extends State<CreateClass> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {}
-                          print(generateRandomString(6));
                         },
                         icon: Icon(Icons.add, color: Colors.black),
-                        label: Text('Create Class',
+                        label: Text('Join Class',
                             style: TextStyle(color: Colors.black)),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.orange[200],

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/student_side/join_class_page.dart';
 import 'package:iiest_attendance/student_side/subject_page.dart';
 import 'package:iiest_attendance/widgets/student_classes_tile.dart';
 import 'package:iiest_attendance/widgets/student_profile_modal_sheet.dart';
@@ -152,6 +153,21 @@ class _StudentHomePageState extends State<StudentHomePage> {
               ),
             ],
           ),
+          floatingActionButton: ElevatedButton.icon(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (f) => JoinClass()));
+            },
+            icon: Icon(Icons.add, color: Colors.black),
+            label: Text('Join a Class', style: TextStyle(color: Colors.black)),
+            style: ElevatedButton.styleFrom(
+                primary: Colors.orange[200],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0))),
+          ),
+          floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.miniEndFloat,
           bottomNavigationBar: iiestFooter(Colors.white),
         );
       },

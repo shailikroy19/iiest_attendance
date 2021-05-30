@@ -133,17 +133,6 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (f) => CreateClass()));
-                        },
-                        icon: Icon(Icons.add, color: Colors.black),
-                        label: Text('Create a Class',
-                            style: TextStyle(color: Colors.black)),
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.orange[200]),
-                      ),
                       TeacherClassTile(),
                     ],
                   ),
@@ -151,6 +140,22 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
               ),
             ],
           ),
+          floatingActionButton: ElevatedButton.icon(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (f) => CreateClass()));
+            },
+            icon: Icon(Icons.add, color: Colors.black),
+            label:
+                Text('Create a Class', style: TextStyle(color: Colors.black)),
+            style: ElevatedButton.styleFrom(
+                primary: Colors.orange[200],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0))),
+          ),
+          floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.miniEndFloat,
           bottomNavigationBar: iiestFooter(Colors.white),
         );
       },
