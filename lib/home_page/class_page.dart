@@ -22,19 +22,24 @@ class _ClassHomePageState extends State<ClassHomePage> {
           child: Container(
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 15.0, top: 15.0, bottom: 15.0),
-                      child: Text(
-                        widget.class_name,
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black),
+                          EdgeInsets.only(left: 15.0, top: 15.0, bottom: 10.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            widget.class_name,
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                        ],
                       ),
                     ),
                     Tooltip(
@@ -53,6 +58,16 @@ class _ClassHomePageState extends State<ClassHomePage> {
                       ),
                     ),
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 14.0, bottom: 5.0),
+                  child: SelectableText(
+                    "Class Code: " + widget.id,
+                    style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
                 ),
                 TabBar(
                   tabs: [
@@ -86,7 +101,7 @@ class _ClassHomePageState extends State<ClassHomePage> {
                 gradient: iiestGradient,
                 backgroundBlendMode: BlendMode.multiply),
           ),
-          preferredSize: Size(MediaQuery.of(context).size.width, 102.0),
+          preferredSize: Size(MediaQuery.of(context).size.width, 120.0),
         ),
         body: TabBarView(
           children: [

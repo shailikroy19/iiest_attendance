@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:iiest_attendance/home_page/class_page.dart';
 
 class TeacherClassTile extends StatelessWidget {
+  final String subjName, subjCode, sem, uid;
+  TeacherClassTile(
+      {required this.subjName,
+      required this.subjCode,
+      required this.sem,
+      required this.uid});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,9 +33,9 @@ class TeacherClassTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "4",
+                      sem,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "Sem",
@@ -44,15 +50,31 @@ class TeacherClassTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'DSA',
+                      subjName,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     Text(
-                      'IT 2101',
+                      subjCode,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.grey),
+                    ),
+                  ],
+                ),
+                VerticalDivider(thickness: 2.0),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      uid,
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Class Code",
                       style: TextStyle(
                           fontWeight: FontWeight.w500, color: Colors.grey),
                     ),
@@ -79,15 +101,13 @@ class TeacherClassTile extends StatelessWidget {
                 //   ],
                 // ),
                 // VerticalDivider(thickness: 2.0),
-                ElevatedButton.icon(
+                ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (f) => ClassHomePage(
-                            class_name: 'DSA - IT2101', id: 'id')));
+                            class_name: subjName + ' - ' + subjCode, id: uid)));
                   },
-                  icon: Icon(Icons.arrow_forward, color: Colors.black),
-                  label:
-                      Text('View Class', style: TextStyle(color: Colors.black)),
+                  child: Icon(Icons.arrow_forward, color: Colors.black),
                   style: ElevatedButton.styleFrom(primary: Colors.green[200]),
                 ),
               ],

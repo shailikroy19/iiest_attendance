@@ -133,3 +133,23 @@ showLogoutAlertDialog(BuildContext context) {
     },
   );
 }
+
+showCodeAlertDialog(BuildContext context, String uid) {
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+    title:
+        Text('CODE', style: TextStyle(color: Colors.redAccent, fontSize: 22.0)),
+    content: SelectableText(
+        'Code: $uid \n\nShare this code with the students.\n\nUsing this, they can join your class.',
+        style: TextStyle(fontSize: 15.0)),
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}

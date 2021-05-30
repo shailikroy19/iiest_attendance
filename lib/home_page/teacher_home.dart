@@ -25,6 +25,8 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
     name = "";
     var data;
 
+    List classesList = [];
+
     final size = MediaQuery.of(context).size;
 
     return FutureBuilder<DocumentSnapshot>(
@@ -62,6 +64,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
         if (snapshot.hasData) {
           data = snapshot.data?.data();
           name = data['name'];
+          classesList = data['classes'];
         }
         return Scaffold(
           appBar: PreferredSize(
@@ -127,23 +130,28 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft)),
               ),
-              SingleChildScrollView(
-                child: Container(
-                  width: size.width,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TeacherClassTile(),
-                    ],
-                  ),
-                ),
+              ListView.builder(
+                itemCount: classesList.length - 1,
+                itemBuilder: (context, index) {
+                  return TeacherClassTile(
+                    subjName: classesList[index + 1]['subj_name'],
+                    subjCode: classesList[index + 1]['subj_code'],
+                    sem: classesList[index + 1]['sem'],
+                    uid: classesList[index + 1]['uid'],
+                  );
+                },
               ),
             ],
           ),
           floatingActionButton: ElevatedButton.icon(
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (f) => CreateClass()));
+                  .push(MaterialPageRoute(
+                      builder: (f) =>
+                          CreateClass(email: email, classesList: classesList)))
+                  .then((value) {
+                setState(() {});
+              });
             },
             icon: Icon(Icons.add, color: Colors.black),
             label:

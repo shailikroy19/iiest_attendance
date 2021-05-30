@@ -1,14 +1,46 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iiest_attendance/colors.dart';
 import 'package:iiest_attendance/widgets/generate_unique_id.dart';
 
 class CreateClass extends StatefulWidget {
+  final String email;
+  final List classesList;
+  const CreateClass({required this.email, required this.classesList});
   @override
   _CreateClassState createState() => _CreateClassState();
 }
 
 class _CreateClassState extends State<CreateClass> {
   final _formKey = GlobalKey<FormState>();
+
+  CollectionReference users = FirebaseFirestore.instance.collection('Teachers');
+
+  TextEditingController subjName = new TextEditingController();
+  TextEditingController subjCode = new TextEditingController();
+  TextEditingController sem = new TextEditingController();
+
+  Future<void> addClass(String uid) {
+    widget.classesList.add({
+      'subj_name': subjName.text,
+      'subj_code': subjCode.text,
+      'sem': sem.text,
+      'uid': uid,
+    });
+    return users
+        .doc(widget.email)
+        .update({'classes': widget.classesList}).then((value) {
+      Fluttertoast.showToast(msg: 'Class Added Sucesfully!');
+      widget.classesList.clear();
+      Navigator.of(context).pop();
+      showCodeAlertDialog(context, uid);
+    }).catchError((error) {
+      Fluttertoast.showToast(msg: 'An Unexpected Error Occured!');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -72,6 +104,7 @@ class _CreateClassState extends State<CreateClass> {
                         }
                         return null;
                       },
+                      controller: subjName,
                       decoration: InputDecoration(
                         hintText: "Enter subject name",
                         contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
@@ -92,6 +125,7 @@ class _CreateClassState extends State<CreateClass> {
                         }
                         return null;
                       },
+                      controller: subjCode,
                       decoration: InputDecoration(
                         hintText: "Enter subject code",
                         contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
@@ -112,6 +146,7 @@ class _CreateClassState extends State<CreateClass> {
                         }
                         return null;
                       },
+                      controller: sem,
                       decoration: InputDecoration(
                         hintText: "Enter semester",
                         contentPadding: EdgeInsets.only(top: 14.0, left: 14.0),
@@ -126,7 +161,9 @@ class _CreateClassState extends State<CreateClass> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {}
-                          print(generateRandomString(6));
+                          String uid = generateRandomString(6);
+
+                          addClass(uid);
                         },
                         icon: Icon(Icons.add, color: Colors.black),
                         label: Text('Create Class',
