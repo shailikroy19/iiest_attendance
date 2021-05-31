@@ -161,6 +161,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                           subjCode: classesList[index + 1]['subj_code'],
                           sem: classesList[index + 1]['sem'],
                           uid: classesList[index + 1]['uid'],
+                          email: email,
                         );
                       },
                     ),

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:iiest_attendance/home_page/class_page.dart';
 
 class TeacherClassTile extends StatelessWidget {
-  final String subjName, subjCode, sem, uid;
+  final String subjName, subjCode, sem, uid, email;
   TeacherClassTile(
       {required this.subjName,
       required this.subjCode,
       required this.sem,
-      required this.uid});
+      required this.uid,
+      required this.email});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -105,7 +106,11 @@ class TeacherClassTile extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (f) => ClassHomePage(
-                            class_name: subjName + ' - ' + subjCode, id: uid)));
+                              class_name: subjName + ' - ' + subjCode,
+                              id: uid,
+                              email: email,
+                              uid: uid,
+                            )));
                   },
                   child: Icon(Icons.arrow_forward, color: Colors.black),
                   style: ElevatedButton.styleFrom(primary: Colors.green[200]),

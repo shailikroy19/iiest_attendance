@@ -19,6 +19,9 @@ class _QRViewExampleState extends State<QRViewExample> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  var now = DateTime.now();
+  var date;
+  @override
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -51,14 +54,13 @@ class _QRViewExampleState extends State<QRViewExample> {
           .where('qr', isEqualTo: code)
           .get()
           .then((value) {
-        ;
         bool isAlreadyPresent = false;
         String teacherEmail = value.docs[0].id;
         String studentEmail =
             FirebaseAuth.instance.currentUser!.email.toString();
         attendanceList = value.docs[0]['${widget.uid}'];
         for (int i = 0; i < attendanceList.length; i++) {
-          if (attendanceList[i] == studentEmail) {
+          if (attendanceList[i]['email'] == studentEmail) {
             isAlreadyPresent = true;
             break;
           }
@@ -73,7 +75,12 @@ class _QRViewExampleState extends State<QRViewExample> {
             gravity: ToastGravity.BOTTOM,
           );
         } else {
-          attendanceList.add(studentEmail);
+          date = now.day.toString() +
+              '-' +
+              now.month.toString() +
+              '-' +
+              now.year.toString();
+          attendanceList.add({'email': studentEmail, 'date': date});
           FirebaseFirestore.instance
               .collection("Teachers")
               .doc(teacherEmail)

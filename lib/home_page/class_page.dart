@@ -1,12 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
 import 'package:iiest_attendance/teachers_side/generate_qr.dart';
 import 'package:iiest_attendance/teachers_side/teacher_subject_page.dart';
 
 class ClassHomePage extends StatefulWidget {
-  final String class_name, id;
+  final String class_name, id, email, uid;
 
-  const ClassHomePage({required this.class_name, required this.id});
+  const ClassHomePage(
+      {required this.class_name,
+      required this.id,
+      required this.email,
+      required this.uid});
   @override
   _ClassHomePageState createState() => _ClassHomePageState();
 }
@@ -15,6 +20,11 @@ class _ClassHomePageState extends State<ClassHomePage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final email = widget.email;
+    final uid = widget.uid;
+    List attendanceList = [];
+    var data;
+    bool isEmpty = false;
     return DefaultTabController(
       length: 2,
       initialIndex: 0,
@@ -122,7 +132,70 @@ class _ClassHomePageState extends State<ClassHomePage> {
               ),
             ),
             //Icon(Icons.directions_transit),
-            TeacherSubject(),
+            //TeacherSubject(),
+            FutureBuilder<DocumentSnapshot>(
+              future: FirebaseFirestore.instance
+                  .collection('Teachers')
+                  .doc(email)
+                  .get(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(strokeWidth: 2.0),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: Text('Loading... Please Wait')),
+                      ),
+                    ],
+                  );
+                }
+
+                if (snapshot.hasError) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text('An unexpexted error occured!'),
+                    ),
+                  );
+                }
+
+                if (snapshot.hasData) {
+                  data = snapshot.data?.data();
+
+                  attendanceList = data[uid];
+                  if (attendanceList.length == 0) {
+                    isEmpty = true;
+                  }
+                }
+
+                return isEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'No classes taken yet.',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 20.0),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: attendanceList.length,
+                        itemBuilder: (context, index) {
+                          return TeacherSubject(
+                            date: attendanceList[index]['date'],
+                            presentCount: '20', //todo: present count
+                          );
+                        },
+                      );
+              },
+            )
           ],
         ),
         bottomNavigationBar: iiestFooter(Colors.white),
