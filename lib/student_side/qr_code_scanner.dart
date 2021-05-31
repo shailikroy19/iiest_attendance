@@ -1,12 +1,16 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-void main() => runApp(MaterialApp(home: QRViewExample()));
+//void main() => runApp(MaterialApp(home: QRViewExample()));
 
 class QRViewExample extends StatefulWidget {
+  final String uid;
+  QRViewExample({required this.uid});
   @override
   State<StatefulWidget> createState() => _QRViewExampleState();
 }
@@ -27,78 +31,146 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller!.resumeCamera();
   }
 
+  //GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD
+  //GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD
+  //GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD
+  List attendanceList = [];
+  dynamic giveAttendance(String code) {
+    if (code.substring(0, 6) != widget.uid) {
+      Fluttertoast.showToast(
+        msg: 'Invalid QR Code for this class',
+        toastLength: Toast.LENGTH_LONG,
+        textColor: Colors.white,
+        fontSize: 15.0,
+        backgroundColor: Colors.black54,
+        gravity: ToastGravity.BOTTOM,
+      );
+    } else {
+      return FirebaseFirestore.instance
+          .collection("Teachers")
+          .where('qr', isEqualTo: code)
+          .get()
+          .then((value) {
+        ;
+        bool isAlreadyPresent = false;
+        String teacherEmail = value.docs[0].id;
+        String studentEmail =
+            FirebaseAuth.instance.currentUser!.email.toString();
+        attendanceList = value.docs[0]['${widget.uid}'];
+        for (int i = 0; i < attendanceList.length; i++) {
+          if (attendanceList[i] == studentEmail) {
+            isAlreadyPresent = true;
+            break;
+          }
+        }
+        if (isAlreadyPresent) {
+          Fluttertoast.showToast(
+            msg: 'Attendance already given!',
+            toastLength: Toast.LENGTH_LONG,
+            textColor: Colors.white,
+            fontSize: 15.0,
+            backgroundColor: Colors.black54,
+            gravity: ToastGravity.BOTTOM,
+          );
+        } else {
+          attendanceList.add(studentEmail);
+          FirebaseFirestore.instance
+              .collection("Teachers")
+              .doc(teacherEmail)
+              .update({'${widget.uid}': attendanceList}).then((value) {
+            Fluttertoast.showToast(
+              msg: 'Attendance given sucessfully',
+              toastLength: Toast.LENGTH_LONG,
+              textColor: Colors.white,
+              fontSize: 15.0,
+              backgroundColor: Colors.black54,
+              gravity: ToastGravity.BOTTOM,
+            );
+          });
+        }
+      });
+    }
+  }
+
+  //GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD
+  //GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD
+  //GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD//GIVE ATTENDANCE METHOD
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
           Expanded(flex: 4, child: _buildQrView(context)),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Scan QR Code from teacher\'s phone',
+                    style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    'Set the QR Code within the designated area and press the \"Give Attendance\" button to register your attendance.',
+                    style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400)),
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  if (result != null)
-                    Text(
-                        'Code Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  else
-                    Text('Scan a code'),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.toggleFlash();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getFlashStatus(),
-                              builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
-                              },
-                            )),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(8),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.flipCamera();
-                              setState(() {});
-                            },
-                            child: FutureBuilder(
-                              future: controller?.getCameraInfo(),
-                              builder: (context, snapshot) {
-                                if (snapshot.data != null) {
-                                  return Text(
-                                      'Camera facing ${describeEnum(snapshot.data!)}');
-                                } else {
-                                  return Text('loading');
-                                }
-                              },
-                            )),
-                      )
-                    ],
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.all(8),
+                  //   child: ElevatedButton(
+                  //       onPressed: () async {
+                  //         await controller?.toggleFlash();
+                  //         setState(() {});
+                  //       },
+                  //       child: FutureBuilder(
+                  //         future: controller?.getFlashStatus(),
+                  //         builder: (context, snapshot) {
+                  //           return Text('Toggle Flash');
+                  //         },
+                  //       )),
+                  // ),
                   Container(
                     margin: EdgeInsets.all(8),
                     child: ElevatedButton(
+                      style:
+                          ElevatedButton.styleFrom(primary: Colors.green[200]),
+                      onPressed: (result == null)
+                          ? null
+                          : () {
+                              //Todo: Add Code to Join class
+                              //---------------------------------------------
+                              giveAttendance(result!.code);
+                              Navigator.pop(context);
+                            },
+                      child: Text(
+                          (result == null) ? 'Scan a Code' : 'Give attendance',
+                          style: TextStyle(fontSize: 18, color: Colors.black)),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    child: IconButton(
                       onPressed: () async {
-                        //Todo: Add Code to Join class
-                        //---------------------------------------------
-                        Navigator.pop(context);
+                        await controller?.flipCamera();
+                        setState(() {});
                       },
-                      child: Text('Give attendance',
-                          style: TextStyle(fontSize: 18)),
+                      icon:
+                          Icon(Icons.cameraswitch_outlined, color: Colors.red),
                     ),
                   ),
                 ],
               ),
-            ),
+            ],
           )
         ],
       ),

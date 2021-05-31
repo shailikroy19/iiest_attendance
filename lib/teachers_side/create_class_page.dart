@@ -40,6 +40,7 @@ class _CreateClassState extends State<CreateClass> {
         backgroundColor: Colors.black54,
         gravity: ToastGravity.BOTTOM,
       );
+      users.doc(widget.email).update({'$uid': []});
       widget.classesList.clear();
       Navigator.of(context).pop();
       showCodeAlertDialog(context, uid);

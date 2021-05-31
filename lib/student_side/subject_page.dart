@@ -114,7 +114,8 @@ class _SubjectPageState extends State<SubjectPage> {
                       onPressed: () {
                         //todo : add scanner
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => QRViewExample()));
+                            builder: (context) =>
+                                QRViewExample(uid: widget.uid)));
                       },
                       child: Text(
                         "Scan QR Code",
