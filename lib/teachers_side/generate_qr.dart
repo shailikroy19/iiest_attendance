@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
+import 'package:iiest_attendance/widgets/generate_unique_id.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class GenerateQRCode extends StatefulWidget {
@@ -15,13 +16,18 @@ class GenerateQRCode extends StatefulWidget {
 
 class _GenerateQRCodeState extends State<GenerateQRCode> {
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     DateTime dateTime = DateTime.now();
 
-    String date = dateTime.toString().substring(0, 10);
-    String time = dateTime.toString().substring(11, 19);
+    //String date = dateTime.toString().substring(0, 10);
+    String rand = generateRandomString(20);
 
-    String qrData = widget.uid + "#" + date + "#" + time;
+    String qrData = widget.uid + "#" + rand;
 
     dynamic updateAttendance(String uid) {
       User? currentUser = FirebaseAuth.instance.currentUser;
@@ -33,10 +39,10 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
     }
 
     updateAttendance(widget.uid);
-    Timer(Duration(seconds: 20), () {
+    Timer timer = Timer(Duration(seconds: 20), () {
       updateAttendance(widget.uid);
       setState(() {
-        time = dateTime.toString().substring(11, 19);
+        rand = generateRandomString(20);
       });
     });
 
@@ -70,6 +76,7 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
                     child: ElevatedButton(
                       onPressed: () {
                         //super.dispose();
+                        timer.cancel();
                         Navigator.of(context).pop();
                       },
                       child:

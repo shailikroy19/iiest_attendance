@@ -88,6 +88,15 @@ class _QRViewExampleState extends State<QRViewExample> {
             );
           });
         }
+      }).onError((error, stackTrace) {
+        Fluttertoast.showToast(
+          msg: 'Invalid QR Code',
+          toastLength: Toast.LENGTH_LONG,
+          textColor: Colors.white,
+          fontSize: 15.0,
+          backgroundColor: Colors.black54,
+          gravity: ToastGravity.BOTTOM,
+        );
       });
     }
   }
