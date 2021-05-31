@@ -21,6 +21,8 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
   Widget build(BuildContext context) {
     String name, email;
 
+    bool isEmpty = false;
+
     email = user.email.toString();
     name = "";
     var data;
@@ -65,6 +67,9 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
           data = snapshot.data?.data();
           name = data['name'];
           classesList = data['classes'];
+          if (classesList.length == 0) {
+            isEmpty = true;
+          }
         }
         return Scaffold(
           appBar: PreferredSize(
@@ -119,30 +124,48 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
             ),
             preferredSize: Size(MediaQuery.of(context).size.width, 85.0),
           ),
-          body: Stack(
-            children: [
-              Container(
-                height: size.height,
-                width: size.width,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [Color(0xffC9FFD9), Colors.white12],
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft)),
-              ),
-              ListView.builder(
-                itemCount: classesList.length - 1,
-                itemBuilder: (context, index) {
-                  return TeacherClassTile(
-                    subjName: classesList[index + 1]['subj_name'],
-                    subjCode: classesList[index + 1]['subj_code'],
-                    sem: classesList[index + 1]['sem'],
-                    uid: classesList[index + 1]['uid'],
-                  );
-                },
-              ),
-            ],
-          ),
+          body: (isEmpty)
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'No classes created yet.',
+                        style: TextStyle(color: Colors.red, fontSize: 20.0),
+                      ),
+                      SizedBox(height: 8.0),
+                      Text(
+                        'Create a class to take attendance.',
+                        style: TextStyle(color: Colors.black, fontSize: 12.0),
+                      ),
+                    ],
+                  ),
+                )
+              : Stack(
+                  children: [
+                    Container(
+                      height: size.height,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: [Color(0xffC9FFD9), Colors.white12],
+                              begin: Alignment.topRight,
+                              end: Alignment.bottomLeft)),
+                    ),
+                    ListView.builder(
+                      itemCount: classesList.length - 1,
+                      itemBuilder: (context, index) {
+                        return TeacherClassTile(
+                          subjName: classesList[index + 1]['subj_name'],
+                          subjCode: classesList[index + 1]['subj_code'],
+                          sem: classesList[index + 1]['sem'],
+                          uid: classesList[index + 1]['uid'],
+                        );
+                      },
+                    ),
+                  ],
+                ),
           floatingActionButton: ElevatedButton.icon(
             onPressed: () {
               Navigator.of(context)
