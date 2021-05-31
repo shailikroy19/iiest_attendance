@@ -24,6 +24,8 @@ class _StudentHomePageState extends State<StudentHomePage> {
 
     var data;
 
+    bool isEmpty = false;
+
     String name, enrol, email;
 
     List classListStudent = [];
@@ -72,6 +74,9 @@ class _StudentHomePageState extends State<StudentHomePage> {
           data = snapshot.data?.data();
           name = data['name'];
           classListStudent = data['classes'];
+          if (classListStudent.length == 0) {
+            isEmpty = true;
+          }
         }
 
         return Scaffold(
@@ -137,30 +142,49 @@ class _StudentHomePageState extends State<StudentHomePage> {
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft)),
               ),
-              ListView.builder(
-                itemCount: classListStudent.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    child: StudentClassTile(
-                      subjName: classListStudent[index]['subj_name'],
-                      subjCode: classListStudent[index]['subj_code'],
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => SubjectPage(
-                            name: classListStudent[index]['subj_name'] +
-                                " - " +
-                                classListStudent[index]['subj_code'],
-                            sem: classListStudent[index]['sem'],
-                            uid: classListStudent[index]['uid'],
+              (isEmpty)
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'No classes joined yet.',
+                            style: TextStyle(color: Colors.red, fontSize: 20.0),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            'Join a class using the code provided to you by your teacher.',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 12.0),
+                          ),
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: classListStudent.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          child: StudentClassTile(
+                            subjName: classListStudent[index]['subj_name'],
+                            subjCode: classListStudent[index]['subj_code'],
+                          ),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SubjectPage(
+                                  name: classListStudent[index]['subj_name'] +
+                                      " - " +
+                                      classListStudent[index]['subj_code'],
+                                  sem: classListStudent[index]['sem'],
+                                  uid: classListStudent[index]['uid'],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
             ],
           ),
           floatingActionButton: ElevatedButton.icon(
