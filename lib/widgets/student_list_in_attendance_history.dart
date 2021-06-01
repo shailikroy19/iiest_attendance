@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
 class StudentListHistory extends StatelessWidget {
-  //TODO:have to make it as user input
-  final String enroll = "510819019";
-  final String name = "Aniket Majhi";
-
+  final String email;
+  StudentListHistory({required this.email});
   @override
   Widget build(BuildContext context) {
     bool ispresent = true;
-    return ListTile(
-      title: IntrinsicHeight(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: IntrinsicHeight(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "$enroll",
+              email.substring(0, 9),
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             VerticalDivider(
@@ -22,7 +21,9 @@ class StudentListHistory extends StatelessWidget {
               color: Colors.black,
             ),
             Text(
-              "$name",
+              email
+                  .substring(email.indexOf('.') + 1, email.indexOf('@'))
+                  .toUpperCase(),
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             VerticalDivider(

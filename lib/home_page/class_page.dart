@@ -171,6 +171,15 @@ class _ClassHomePageState extends State<ClassHomePage> {
                   }
                 }
 
+                List abc = List.generate(attendanceList.length,
+                    (index) => attendanceList[index]['date']);
+
+                //REMOVE DUPLICATE ENTRIES//REMOVE DUPLICATE ENTRIES//REMOVE DUPLICATE ENTRIES
+                abc = [
+                  ...{...abc}
+                ];
+                //REMOVE DUPLICATE ENTRIES//REMOVE DUPLICATE ENTRIES//REMOVE DUPLICATE ENTRIES
+
                 return isEmpty
                     ? Padding(
                         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -188,11 +197,11 @@ class _ClassHomePageState extends State<ClassHomePage> {
                         ),
                       )
                     : ListView.builder(
-                        itemCount: attendanceList.length,
+                        itemCount: abc.length,
                         itemBuilder: (context, index) {
                           return TeacherSubject(
-                            date: attendanceList[index]['date'],
-                            presentCount: '20', //todo: present count
+                            date: abc[index],
+                            students: attendanceList,
                           );
                         },
                       );

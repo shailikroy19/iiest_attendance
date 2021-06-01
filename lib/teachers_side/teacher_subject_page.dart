@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:iiest_attendance/colors.dart';
 import 'package:iiest_attendance/teachers_side/attendance_history_page.dart';
 
 class TeacherSubject extends StatefulWidget {
-  final String date, presentCount;
-
-  TeacherSubject({required this.date, required this.presentCount});
+  final String date;
+  final List students;
+  TeacherSubject({required this.date, required this.students});
   @override
   _TeacherSubjectState createState() => _TeacherSubjectState();
 }
@@ -14,7 +13,7 @@ class _TeacherSubjectState extends State<TeacherSubject> {
   @override
   Widget build(BuildContext context) {
     final String date = widget.date;
-    final String presentCount = widget.presentCount;
+
     return Column(
       children: <Widget>[
         Padding(
@@ -24,8 +23,9 @@ class _TeacherSubjectState extends State<TeacherSubject> {
                 borderRadius: BorderRadius.circular(8.0)),
             tileColor: Colors.orange[200],
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (f) => AttendanceHistory()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (f) => AttendanceHistory(
+                      date: date, students: widget.students)));
             },
             title: Text(
               date,
@@ -34,9 +34,7 @@ class _TeacherSubjectState extends State<TeacherSubject> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            //TODO: Present&time
-            trailing: Text('Present: ' + presentCount),
-            subtitle: Text('14:32'),
+            trailing: Text('Tap to view details'),
           ),
         ),
       ],
