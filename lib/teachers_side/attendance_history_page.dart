@@ -47,8 +47,8 @@ class _AttendanceHistoryState extends State<AttendanceHistory> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            StudentListHistory(ispresent: true),
-            StudentListHistory(ispresent: false),
+            StudentListHistory(),
+            StudentListHistory(),
           ],
         ),
       ),

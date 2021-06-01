@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class StudentClassTile extends StatelessWidget {
-  final String subjName, subjCode;
+  final String subjName, subjCode, sem, uid;
 
-  const StudentClassTile({required this.subjName, required this.subjCode});
+  const StudentClassTile(
+      {required this.subjName,
+      required this.subjCode,
+      required this.sem,
+      required this.uid});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,10 +35,10 @@ class StudentClassTile extends StatelessWidget {
                     Text(
                       subjName,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 16,
                     ),
                     Text(
                       subjCode,
@@ -48,17 +52,17 @@ class StudentClassTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '25',
+                      sem,
                       style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 20,
+                          color: Colors.black,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 16,
                     ),
                     Text(
-                      'Total Classes',
+                      'Sem',
                       style: TextStyle(
                           fontWeight: FontWeight.w500, color: Colors.grey),
                     ),
@@ -68,15 +72,30 @@ class StudentClassTile extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '15',
+                    SelectableText(
+                      uid,
                       style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 20,
+                          color: Colors.blueAccent,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 16,
+                    ),
+                    Text(
+                      'Class Code',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, color: Colors.grey),
+                    ),
+                  ],
+                ),
+                VerticalDivider(thickness: 2.0),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.arrow_forward),
+                    SizedBox(
+                      height: 16,
                     ),
                     Text(
                       'Attendance',

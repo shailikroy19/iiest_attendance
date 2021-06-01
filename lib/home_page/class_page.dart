@@ -178,9 +178,11 @@ class _ClassHomePageState extends State<ClassHomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'No classes taken yet.',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 20.0),
+                              'No attendance records found for this class.',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),

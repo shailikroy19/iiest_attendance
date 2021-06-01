@@ -58,9 +58,18 @@ class _QRViewExampleState extends State<QRViewExample> {
         String teacherEmail = value.docs[0].id;
         String studentEmail =
             FirebaseAuth.instance.currentUser!.email.toString();
+
         attendanceList = value.docs[0]['${widget.uid}'];
+
+        date = now.day.toString() +
+            '-' +
+            now.month.toString() +
+            '-' +
+            now.year.toString();
+
         for (int i = 0; i < attendanceList.length; i++) {
-          if (attendanceList[i]['email'] == studentEmail) {
+          if (attendanceList[i]['email'] == studentEmail &&
+              attendanceList[i]['date'] == date) {
             isAlreadyPresent = true;
             break;
           }
@@ -75,11 +84,6 @@ class _QRViewExampleState extends State<QRViewExample> {
             gravity: ToastGravity.BOTTOM,
           );
         } else {
-          date = now.day.toString() +
-              '-' +
-              now.month.toString() +
-              '-' +
-              now.year.toString();
           attendanceList.add({'email': studentEmail, 'date': date});
           FirebaseFirestore.instance
               .collection("Teachers")

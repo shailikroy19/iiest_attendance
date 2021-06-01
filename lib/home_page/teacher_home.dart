@@ -127,19 +127,24 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
           body: (isEmpty)
               ? Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'No classes created yet.',
-                        style: TextStyle(color: Colors.red, fontSize: 20.0),
-                      ),
-                      SizedBox(height: 8.0),
-                      Text(
-                        'Create a class to take attendance.',
-                        style: TextStyle(color: Colors.black, fontSize: 12.0),
-                      ),
-                    ],
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'No classes created yet.',
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 8.0),
+                        Text(
+                          'Create a class to take attendance.',
+                          style: TextStyle(color: Colors.black, fontSize: 15.0),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               : Stack(
@@ -154,13 +159,13 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                               end: Alignment.bottomLeft)),
                     ),
                     ListView.builder(
-                      itemCount: classesList.length - 1,
+                      itemCount: classesList.length,
                       itemBuilder: (context, index) {
                         return TeacherClassTile(
-                          subjName: classesList[index + 1]['subj_name'],
-                          subjCode: classesList[index + 1]['subj_code'],
-                          sem: classesList[index + 1]['sem'],
-                          uid: classesList[index + 1]['uid'],
+                          subjName: classesList[index]['subj_name'],
+                          subjCode: classesList[index]['subj_code'],
+                          sem: classesList[index]['sem'],
+                          uid: classesList[index]['uid'],
                           email: email,
                         );
                       },

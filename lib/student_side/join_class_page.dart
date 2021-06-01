@@ -76,7 +76,7 @@ class _JoinClassState extends State<JoinClass> {
     return users.get().then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
         abc = element['classes'];
-        for (int i = 1; i < abc.length; i++) {
+        for (int i = 0; i < abc.length; i++) {
           xyz = abc[i];
           if (xyz['uid'] == uid) {
             isFound = true;

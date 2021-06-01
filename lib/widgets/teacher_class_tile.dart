@@ -45,7 +45,6 @@ class TeacherClassTile extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 VerticalDivider(thickness: 2.0),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -82,26 +81,6 @@ class TeacherClassTile extends StatelessWidget {
                   ],
                 ),
                 VerticalDivider(thickness: 2.0),
-                // Column(
-                //   children: [
-                //     Text(
-                //       '25',
-                //       style: TextStyle(
-                //           color: Colors.green,
-                //           fontSize: 20,
-                //           fontWeight: FontWeight.bold),
-                //     ),
-                //     SizedBox(
-                //       height: 20,
-                //     ),
-                //     Text(
-                //       'Total Classes',
-                //       style: TextStyle(
-                //           fontWeight: FontWeight.w500, color: Colors.grey),
-                //     ),
-                //   ],
-                // ),
-                // VerticalDivider(thickness: 2.0),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(

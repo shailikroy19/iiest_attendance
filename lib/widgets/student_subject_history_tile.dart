@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class StudentSubjectHistoryTile extends StatelessWidget {
-  final bool isPresent;
-
-  const StudentSubjectHistoryTile({required this.isPresent});
+  final String date;
+  StudentSubjectHistoryTile({required this.date});
   @override
   Widget build(BuildContext context) {
+    bool isPresent = true;
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Container(
@@ -22,12 +22,8 @@ class StudentSubjectHistoryTile extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         child: ListTile(
           title: Text(
-            "24/04/2021",
+            date,
             style: TextStyle(fontWeight: FontWeight.w600),
-          ),
-          //TODO: date&time
-          subtitle: Text(
-            "14:32",
           ),
           trailing: Text(
             (isPresent) ? 'Present' : 'Absent',

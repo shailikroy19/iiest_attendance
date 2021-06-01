@@ -4,12 +4,10 @@ class StudentListHistory extends StatelessWidget {
   //TODO:have to make it as user input
   final String enroll = "510819019";
   final String name = "Aniket Majhi";
-  final bool ispresent;
-
-  const StudentListHistory({required this.ispresent});
 
   @override
   Widget build(BuildContext context) {
+    bool ispresent = true;
     return ListTile(
       title: IntrinsicHeight(
         child: Row(

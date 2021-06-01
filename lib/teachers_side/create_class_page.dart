@@ -176,9 +176,22 @@ class _CreateClassState extends State<CreateClass> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {}
-                          String uid = generateRandomString(6);
 
-                          addClass(uid);
+                          if (subjName.text == "" ||
+                              subjCode.text == "" ||
+                              sem.text == "") {
+                            Fluttertoast.showToast(
+                              msg: 'Fields cannot be empty!',
+                              toastLength: Toast.LENGTH_LONG,
+                              textColor: Colors.white,
+                              fontSize: 15.0,
+                              backgroundColor: Colors.black54,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                          } else {
+                            String uid = generateRandomString(6);
+                            addClass(uid);
+                          }
                         },
                         icon: Icon(Icons.add, color: Colors.black),
                         label: Text('Create Class',

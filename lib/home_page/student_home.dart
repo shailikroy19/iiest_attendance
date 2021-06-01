@@ -168,6 +168,8 @@ class _StudentHomePageState extends State<StudentHomePage> {
                           child: StudentClassTile(
                             subjName: classListStudent[index]['subj_name'],
                             subjCode: classListStudent[index]['subj_code'],
+                            sem: classListStudent[index]['sem'],
+                            uid: classListStudent[index]['uid'],
                           ),
                           onTap: () {
                             Navigator.of(context).push(
