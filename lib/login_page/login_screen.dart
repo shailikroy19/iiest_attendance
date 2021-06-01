@@ -104,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //#####################################################################################################
                 //#####################################################################################################
                 //FIREBASE LOGIN CODE
+
                 (flag)
                     ? FutureBuilder(
                         future: loginUser(
@@ -152,6 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         // Navigator.of(context).pushReplacement(
                         //     MaterialPageRoute(builder: (f) => HomeScreen()));
                         // CALLING WEB SERVICE
+                        emailController.text = emailController.text.trim();
+                        passwordController.text =
+                            passwordController.text.trim();
                         if (emailController.text == '' ||
                             passwordController.text == '') {
                           Fluttertoast.showToast(
