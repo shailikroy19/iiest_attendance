@@ -116,20 +116,62 @@ class _ClassHomePageState extends State<ClassHomePage> {
         ),
         body: TabBarView(
           children: [
-            Center(
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (f) => GenerateQRCode(uid: widget.id)));
-                },
-                icon: Icon(Icons.add_outlined, color: Colors.black),
-                label: Text('Take Attendance',
-                    style: TextStyle(color: Colors.black)),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.orange[200],
-                  fixedSize: Size(size.width / 2, 100.0),
+            Stack(
+              children: [
+                Container(
+                  height: size.height,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [Color(0xffC9FFD9), Colors.white12],
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft)),
                 ),
-              ),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'Tap to show QR Code.',
+                          style: TextStyle(
+                              fontSize: 14.0, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (f) => GenerateQRCode(uid: widget.id)));
+                        },
+                        icon: Icon(Icons.add_outlined, color: Colors.black),
+                        label: Text('Take Attendance',
+                            style: TextStyle(color: Colors.black)),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.orange[200],
+                          fixedSize: Size(size.width / 2, 100.0),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'Students need to scan the code on their phones.',
+                          style: TextStyle(
+                              fontSize: 12.0, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'On scanning, attendance is registered automatically.',
+                          style: TextStyle(
+                              fontSize: 12.0, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             //Icon(Icons.directions_transit),
             //TeacherSubject(),
@@ -206,7 +248,7 @@ class _ClassHomePageState extends State<ClassHomePage> {
                         },
                       );
               },
-            )
+            ),
           ],
         ),
         bottomNavigationBar: iiestFooter(Colors.white),

@@ -76,16 +76,16 @@ class _JoinClassState extends State<JoinClass> {
     return users.get().then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((element) {
         abc = element['classes'];
+        print(abc);
         for (int i = 0; i < abc.length; i++) {
           xyz = abc[i];
           if (xyz['uid'] == uid) {
             isFound = true;
-            break;
+            addClass(xyz, uid);
           }
         }
       });
       if (isFound) {
-        addClass(xyz, uid);
         Navigator.of(context).pop();
       } else {
         Fluttertoast.showToast(
