@@ -59,23 +59,23 @@ class FirstScreen extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Registered Students',
+                                  'For Registered Students',
                                   style: TextStyle(
-                                      fontSize: 15.0,
+                                      fontSize: 14.0,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Text(
-                                  '100',
-                                  //TODO:will change
-                                  style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(bottom: 8.0),
+                              //   child: Text(
+                              //     '100',
+
+                              //     style: TextStyle(
+                              //         fontSize: 15.0,
+                              //         color: Colors.blue,
+                              //         fontWeight: FontWeight.bold),
+                              //   ),
+                              // ),
                             ],
                           ),
                           Container(
@@ -112,23 +112,23 @@ class FirstScreen extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Registered Teachers',
+                                  'For Registered Teachers',
                                   style: TextStyle(
-                                      fontSize: 15.0,
+                                      fontSize: 14.0,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Text(
-                                  '10',
-                                  //TODO:will change
-                                  style: TextStyle(
-                                      fontSize: 15.0,
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(bottom: 8.0),
+                              //   child: Text(
+                              //     '10',
+                              //
+                              //     style: TextStyle(
+                              //         fontSize: 15.0,
+                              //         color: Colors.blue,
+                              //         fontWeight: FontWeight.bold),
+                              //   ),
+                              // ),
                             ],
                           ),
                           Container(

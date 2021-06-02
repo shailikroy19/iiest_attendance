@@ -89,21 +89,21 @@ class StudentClassTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                VerticalDivider(thickness: 2.0),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(Icons.arrow_forward),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      'Attendance',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500, color: Colors.grey),
-                    ),
-                  ],
-                ),
+                // VerticalDivider(thickness: 2.0),
+                // Column(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Icon(Icons.arrow_forward),
+                //     SizedBox(
+                //       height: 16,
+                //     ),
+                //     Text(
+                //       'Attendance',
+                //       style: TextStyle(
+                //           fontWeight: FontWeight.w500, color: Colors.grey),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

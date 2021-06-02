@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iiest_attendance/home_page/home_screen.dart';
 import 'package:iiest_attendance/login_page/first_screen.dart';
 
@@ -10,6 +11,10 @@ void main() async {
   await Firebase.initializeApp();
   //run the app
   //
+
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   runApp(MyApp());
 }
 

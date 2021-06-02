@@ -114,14 +114,11 @@ class _GenerateQRCodeState extends State<GenerateQRCode> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () => updateAttendance(widget.uid),
-                  child: QrImage(
-                    foregroundColor: Colors.black,
-                    data: qrData,
-                    version: QrVersions.auto,
-                    size: 165.0,
-                  ),
+                child: QrImage(
+                  foregroundColor: Colors.black,
+                  data: qrData,
+                  version: QrVersions.auto,
+                  size: 165.0,
                 ),
               ),
             ),

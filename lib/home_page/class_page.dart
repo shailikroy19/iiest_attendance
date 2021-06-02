@@ -53,21 +53,21 @@ class _ClassHomePageState extends State<ClassHomePage> {
                         ],
                       ),
                     ),
-                    Tooltip(
-                      message: 'Delete Class',
-                      child: InkWell(
-                        child: IconButton(
-                          onPressed: () {
-                            //TODO: Delete
-                          },
-                          icon: Icon(
-                            Icons.delete_outline,
-                            size: 28.0,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Tooltip(
+                    //   message: 'Delete Class',
+                    //   child: InkWell(
+                    //     child: IconButton(
+                    //       onPressed: () {
+                    //         //TODO: Delete
+                    //       },
+                    //       icon: Icon(
+                    //         Icons.delete_outline,
+                    //         size: 28.0,
+                    //         color: Colors.black,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 Padding(

@@ -26,7 +26,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
 
     bool isEmpty = false;
 
-    String name, enrol, email;
+    String name, enrol, email, sem, dept;
 
     List classListStudent = [];
 
@@ -34,7 +34,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
 
     enrol = email.substring(0, 9);
 
-    name = "";
+    name = sem = dept = "";
 
     final size = MediaQuery.of(context).size;
 
@@ -73,6 +73,8 @@ class _StudentHomePageState extends State<StudentHomePage> {
         if (snapshot.hasData) {
           data = snapshot.data?.data();
           name = data['name'];
+          sem = data['sem'];
+          dept = data['dept'];
           classListStudent = data['classes'];
           if (classListStudent.length == 0) {
             isEmpty = true;
@@ -105,7 +107,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
                         child: IconButton(
                           onPressed: () {
                             StudentModalSheet(
-                                context, size, name, enrol, email);
+                                context, size, name, enrol, email, sem, dept);
                           },
                           icon: Icon(
                             Icons.account_circle_outlined,
@@ -193,8 +195,12 @@ class _StudentHomePageState extends State<StudentHomePage> {
             onPressed: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(
-                      builder: (f) =>
-                          JoinClass(classList: classListStudent, email: email)))
+                      builder: (f) => JoinClass(
+                            classList: classListStudent,
+                            email: email,
+                            sem: sem,
+                            dept: dept,
+                          )))
                   .then((value) {
                 setState(() {});
               });

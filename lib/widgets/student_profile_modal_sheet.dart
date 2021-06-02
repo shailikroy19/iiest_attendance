@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iiest_attendance/colors.dart';
 
-Future<dynamic> StudentModalSheet(
-    BuildContext context, Size size, String name, String enrol, String email) {
+Future<dynamic> StudentModalSheet(BuildContext context, Size size, String name,
+    String enrol, String email, String sem, String dept) {
   return showModalBottomSheet(
     backgroundColor: Colors.transparent,
     context: context,
@@ -33,8 +33,8 @@ Future<dynamic> StudentModalSheet(
           ),
           Container(
             width: size.width,
-            //height: size.height / 2.3,
-            height: 180.0,
+            //height: size.height / 2.1,
+            height: 200.0,
             color: Colors.white,
             child: Column(
               children: [
@@ -95,6 +95,40 @@ Future<dynamic> StudentModalSheet(
                             ],
                           ),
                         ),
+                        SelectableText.rich(
+                          TextSpan(
+                            text: "Sem: ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: sem,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SelectableText.rich(
+                          TextSpan(
+                            text: "Dept: ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: dept,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                     subtitle: SelectableText.rich(
@@ -108,19 +142,16 @@ Future<dynamic> StudentModalSheet(
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(primary: Colors.red[300]),
-                      onPressed: () {
-                        showLogoutAlertDialog(context);
-                      },
-                      icon: Icon(Icons.logout_outlined, color: Colors.black),
-                      label: Text(
-                        'LOGOUT',
-                        style: TextStyle(color: Colors.black),
-                      )),
-                ),
+                ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(primary: Colors.red[300]),
+                    onPressed: () {
+                      showLogoutAlertDialog(context);
+                    },
+                    icon: Icon(Icons.logout_outlined, color: Colors.black),
+                    label: Text(
+                      'LOGOUT',
+                      style: TextStyle(color: Colors.black),
+                    )),
               ],
             ),
           ),

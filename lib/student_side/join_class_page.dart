@@ -5,8 +5,12 @@ import 'package:iiest_attendance/colors.dart';
 
 class JoinClass extends StatefulWidget {
   final List classList;
-  final String email;
-  JoinClass({required this.classList, required this.email});
+  final String email, sem, dept;
+  JoinClass(
+      {required this.classList,
+      required this.email,
+      required this.sem,
+      required this.dept});
   @override
   _JoinClassState createState() => _JoinClassState();
 }
@@ -79,7 +83,9 @@ class _JoinClassState extends State<JoinClass> {
         print(abc);
         for (int i = 0; i < abc.length; i++) {
           xyz = abc[i];
-          if (xyz['uid'] == uid) {
+          if (xyz['uid'] == uid &&
+              xyz['sem'] == widget.sem &&
+              xyz['subj_code'].toString().substring(0, 2) == widget.dept) {
             isFound = true;
             addClass(xyz, uid);
           }
