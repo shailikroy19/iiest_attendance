@@ -92,13 +92,19 @@ class _SubjectPageState extends State<SubjectPage> {
                       ),
                     ),
                     Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(Icons.history_edu_outlined, color: Colors.black),
-                          Text('View History',
-                              style: TextStyle(color: Colors.black)),
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {});
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(Icons.history_edu_outlined,
+                                color: Colors.black),
+                            Text('View History',
+                                style: TextStyle(color: Colors.black)),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -142,9 +148,13 @@ class _SubjectPageState extends State<SubjectPage> {
                     ElevatedButton(
                       onPressed: () {
                         //todo : add scanner
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                QRViewExample(uid: widget.uid)));
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(
+                                builder: (context) =>
+                                    QRViewExample(uid: widget.uid)))
+                            .then((value) {
+                          setState(() {});
+                        });
                       },
                       child: Text(
                         "Scan QR Code",

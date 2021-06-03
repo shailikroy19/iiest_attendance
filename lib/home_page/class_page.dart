@@ -93,13 +93,19 @@ class _ClassHomePageState extends State<ClassHomePage> {
                       ),
                     ),
                     Tab(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(Icons.history_edu_outlined, color: Colors.black),
-                          Text('View History',
-                              style: TextStyle(color: Colors.black)),
-                        ],
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {});
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(Icons.history_edu_outlined,
+                                color: Colors.black),
+                            Text('View History',
+                                style: TextStyle(color: Colors.black)),
+                          ],
+                        ),
                       ),
                     ),
                   ],
